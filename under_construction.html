@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Under Construction</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Noto+Sans+KR:wght@300;400;600;700&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #070B14;
+            color: #f8fafc;
+            font-family: 'Outfit', 'Noto Sans KR', sans-serif;
+            overflow: hidden;
+        }
+        
+        .construction-container {
+            text-align: center;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #1E90FF, #00FF7F);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #94A3B8;
+            margin-bottom: 30px;
+        }
+
+        .loader {
+            width: 250px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .loader::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #1E90FF, #00FF7F);
+            animation: loadProgress 3s linear forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+
+        @keyframes loadProgress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="construction-container">
+        <div class="icon">🚧</div>
+        <h1>Under Construction...</h1>
+        <p>페이지를 준비 중입니다. 3초 후 원위치로 돌아갑니다.</p>
+        <div class="loader"></div>
+    </div>
+
+    <script>
+        // 3초 후 메인 페이지로 돌아가기
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 3000);
+    </script>
+</body>
+</html>

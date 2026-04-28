@@ -268,6 +268,9 @@ body {
   transition: all 0.5s ease; 
   opacity: 0; 
   transform: translateY(40px); 
+  text-decoration: none;
+  display: block;
+  color: inherit;
 }
 .feature-card.visible { 
   opacity: 1; 
