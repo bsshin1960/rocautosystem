@@ -115,6 +115,7 @@ body {
   height: 100%; 
   background: linear-gradient(to bottom, rgba(7,11,20,0.6), rgba(7,11,20,0.95)); 
   z-index: -1; 
+  animation: brightenVideo 5s ease-in-out forwards;
 }
 .mute-btn {
   position: absolute;
@@ -187,10 +188,55 @@ body {
   transform: scale(1.2);
 }
 
+.progress-control {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 12px 24px;
+  border-radius: 30px;
+  z-index: 10;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+#videoProgress {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+  outline: none;
+}
+
+#videoProgress::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--primary);
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(30, 144, 255, 0.5);
+  transition: transform 0.2s;
+}
+
+#videoProgress::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
 .hero-content { 
-  max-width: 900px; 
-  padding: 20px; 
-  animation: fadeInUp 1.2s ease forwards; 
+  max-width: 100%; 
+  width: 90vw;
+  padding: 0; 
+  animation: fadeInUp 1.2s ease forwards, fadeOut 2s ease 3s forwards; 
 }
 .hero-content h1 { 
   font-size: 4.5rem; 
@@ -202,8 +248,9 @@ body {
 .hero-content p { 
   font-size: 1.5rem; 
   margin-bottom: 45px; 
-  color: #94A3B8; 
-  font-weight: 300;
+  color: #fff; 
+  font-weight: 400;
+  text-shadow: 0 0 20px rgba(30,144,255,0.4);
 }
 .btn { 
   display: inline-block; 
@@ -298,6 +345,16 @@ body {
 @keyframes fadeInUp { 
   from { opacity: 0; transform: translateY(40px); } 
   to { opacity: 1; transform: translateY(0); } 
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes brightenVideo {
+  from { opacity: 1; }
+  to { opacity: 0; }
 }
 
 /* Footer */
