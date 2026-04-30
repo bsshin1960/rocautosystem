@@ -212,27 +212,31 @@ if (muteBtn && heroVideo) {
 
         if (heroVideo.muted) {
             // 현재 음소거 상태일 때 누르면 -> 소리를 켬
-            heroVideo.muted = false;  // 기본값: 소리 켜짐 (기존: true)
-            muteIcon.textContent = i18n[currentLang].mute_on;  // 초기 버튼 텍스트: '소리 끄기'
-            muteBtn.style.borderColor = 'var(--secondary)';  // 초기 테두리: 켜짐 상태 색상
+            heroVideo.muted = false;
+            muteIcon.textContent = i18n[currentLang].mute_on; // 소리가 켜졌으므로 '소리 끄기(🔊)' 아이콘으로 변경
+            muteBtn.style.borderColor = 'var(--secondary)';
             try {
                 // 음소거 해제 후 재생 시도 (자동 클릭 시 브라우저 정책에 의해 차단될 수 있음)
                 await heroVideo.play();
             } catch (err) {
-                console.warn("오디오 재생이 차단되었습니다. 음소거 상태로 계속 재생합니다.", err);
+                console.warn("오디오 재생이 차단되었습니다. 1초 후 다시 시도합니다.", err);
                 // 재생이 차단되면 다시 음소거 상태로 되돌리고 비디오를 계속 재생함
                 heroVideo.muted = true;
                 muteIcon.textContent = i18n[currentLang].mute_off; // '소리 켜기'
-                muteBtn.style.borderColor = 'rgba(255, 0, 0, 0.5)'; // 차단됨을 시각적으로 임시 표시 (빨간 테두리)
-                
-                // 사용자에게 클릭을 유도하기 위해 버튼을 잠시 흔들거나 강조
+
+                // 일시적으로 버튼 테두리가 빨간색으로 깜빡거림
+                muteBtn.style.transition = 'all 0.3s ease';
+                muteBtn.style.borderColor = 'rgba(255, 0, 0, 0.8)';
                 muteBtn.style.transform = 'scale(1.1)';
-                setTimeout(() => { 
-                    muteBtn.style.transform = 'scale(1)'; 
-                    muteBtn.style.borderColor = 'rgba(255, 255, 255, 0.2)';
-                }, 1000);
 
                 heroVideo.play().catch(e => console.log("재생 실패:", e));
+
+                // 1초 후 원래 상태로 복구하고 다시 마우스 클릭 (재시도)
+                setTimeout(() => {
+                    muteBtn.style.transform = 'scale(1)';
+                    muteBtn.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                    muteBtn.click();
+                }, 1000);
             }
         } else {
             // 현재 소리가 날 때 누르면 -> 소리를 끔
